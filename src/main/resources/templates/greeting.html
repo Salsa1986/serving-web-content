@@ -6,8 +6,13 @@
 </head>
 <body>
 <h1>Uzupełnij poniższe dane:</h1>
-<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
-    <p>Login: <input type="text" th:field="*{name}" /></p>
+<form action="#" th:action="@{/person}" th:object="${person}" method="post">
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p>SurName: <input type="text" th:field="*{surName}" /></p>
+    <p>Login: <input type="text" th:field="*{login}" /></p>
+    <p>Password: <input type="text" th:field="*{password}" /></p>
+    <p>Phone Number: <input type="text" th:field="*{phoneNumber}" /></p>
+    <p>Email Adress: <input type="text" th:field="*{emailAdress}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 <h2>Historia</h2>
@@ -20,6 +25,10 @@
     <tr th:each="history : ${history}">
         <td th:text="${history.getId()}"/>
         <td th:text="${history.getName()}"/>
+        <td th:text="${history.getSurname()}"/>
+        <td th:text="${history.getLogin()}"/>
+        <td th:text="${history.getPhoneNumber()}"/>
+        <td th:text="${history.getEmailAdress()}"/>
     </tr>
 </table>
 </body>

@@ -1,8 +1,10 @@
 package com.example.servingwebcontent.service;
 
-import com.example.servingwebcontent.Greeting;
+import com.example.servingwebcontent.model.Person;
 import org.springframework.stereotype.Service;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,25 +13,22 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
-public class GreetingDataService implements GreetingService {
+public class ModelDataService implements ModelService {
 
     public static final Path HISTORY = Path.of("history");
-    Map<Long, Greeting> mapGreetingHistory = new HashMap<>();
+    Map<Long, Person> mapGreetingHistory = new HashMap<>();
     private final AtomicLong idCounter = new AtomicLong();
 
     @Override
-    public void addUserToHistory(String name) {
-        Greeting greeting = new Greeting();
-        greeting.setId(idCounter.get());
-        greeting.setName(name);
-        mapGreetingHistory.put(idCounter.getAndIncrement(), greeting);
+    public void addUserToBase(Person person) {
+        mapGreetingHistory.put(idCounter.getAndIncrement(), person);
     }
 
     @Override
-    public List<Greeting> getHistorySortByName() {
+    public List<Person> getHistorySortByName() {
         return mapGreetingHistory.values()
                 .stream()
-                .sorted(Comparator.comparing(greeting -> greeting.getName().toLowerCase()))
+                .sorted(Comparator.comparing(person -> person.getName().toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -52,12 +51,25 @@ public class GreetingDataService implements GreetingService {
 
     @Override
     public List<String> getHistoryToSave() {
-        return mapGreetingHistory.values().stream().map(Greeting::toTextFormat).collect(Collectors.toList());
+        return mapGreetingHistory.values().stream().map(Person::toTextFormat).collect(Collectors.toList());
     }
 
     @Override
-    public List<Greeting> getHistory() {
+    public List<Person> getHistory() {
         return mapGreetingHistory.values().stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public JsonObject convertToJson(Person person) {
+        JsonObject personObject = Json.createObjectBuilder()
+                .add("Id", person.getId())
+                .add("Name", person.getName())
+                .add("Surname", person.getSurname())
+                .add("Login", person.getLogin())
+                .add("PhoneNumber", person.getPhoneNumber())
+                .add("Email", person.getEmailAdress())
+                .build();
+        return personObject;
     }
 
 }
