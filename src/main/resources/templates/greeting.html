@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Uzupełnij poniższe dane:</h1>
+<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+    <p>Login: <input type="text" th:field="*{name}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+<h2>Historia</h2>
+<style> td { border: 1px solid black; } </style>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+    </tr>
+    <tr th:each="history : ${history}">
+        <td th:text="${history.getId()}"/>
+        <td th:text="${history.getName()}"/>
+    </tr>
+</table>
+</body>
+</html>
