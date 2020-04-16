@@ -7,8 +7,6 @@ public class Person {
     private Long id;
     private String name;
     private String surname;
-    private String login;
-    private String password;
     private String phoneNumber;
     private String emailAdress;
 
@@ -37,22 +35,6 @@ public class Person {
         this.surname = surname;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -69,19 +51,6 @@ public class Person {
         this.emailAdress = emailAdress;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAdress='" + emailAdress + '\'' +
-                '}';
-    }
-
     public String toTextFormat() {
         System.out.println(id);
         return String.format("%d, %s,", id, name);
@@ -92,7 +61,6 @@ public class Person {
                 .add("Id", id)
                 .add("Name", name)
                 .add("Surname", surname)
-                .add("Login", login)
                 .add("PhoneNumber", phoneNumber)
                 .add("Email", emailAdress)
                 .build().toString();

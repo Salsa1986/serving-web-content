@@ -5,13 +5,15 @@ import com.example.servingwebcontent.service.ModelDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
-@RequestMapping
 public class PersonController {
 
     ModelDataService modelDataService;
@@ -23,18 +25,18 @@ public class PersonController {
         this.modelDataService = modelDataService;
     }
 
-    @GetMapping("/person")
+    @GetMapping("/personform")
     public String greeting(Model model) {
         model.addAttribute("person", new Person());
-        return "person";
+        return "personform";
     }
 
-    @PostMapping("/person")
-    public String getLogin(@ModelAttribute Person person, Model model){
+    @PostMapping("/personform")
+    public String getLogin(@ModelAttribute Person person, Model model) {
         modelDataService.addUserToBase(person);
         modelDataService.saveHistoryToFile();
         model.addAttribute("history", modelDataService.getHistory());
-        return "person";
+        return "personform";
     }
 
 }
