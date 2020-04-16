@@ -69,18 +69,32 @@ public class Person {
         this.emailAdress = emailAdress;
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAdress='" + emailAdress + '\'' +
+                '}';
+    }
+
     public String toTextFormat() {
+        System.out.println(id);
         return String.format("%d, %s,", id, name);
     }
 
-    public static String convertToJson(Person person) {
+    public String convertToJson() {
         String personObject = Json.createObjectBuilder()
-                .add("Id", person.getId())
-                .add("Name", person.getName())
-                .add("Surname", person.getSurname())
-                .add("Login", person.getLogin())
-                .add("PhoneNumber", person.getPhoneNumber())
-                .add("Email", person.getEmailAdress())
+                .add("Id", id)
+                .add("Name", name)
+                .add("Surname", surname)
+                .add("Login", login)
+                .add("PhoneNumber", phoneNumber)
+                .add("Email", emailAdress)
                 .build().toString();
         return personObject;
     }

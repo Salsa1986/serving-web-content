@@ -22,7 +22,8 @@ public class ModelDataService implements ModelService {
 
     @Override
     public void addUserToBase(Person person) {
-        mapGreetingHistory.put(idCounter.getAndIncrement(), person);
+        person.setId(idCounter.incrementAndGet());
+        mapGreetingHistory.put(idCounter.get(), person);
     }
 
     @Override
