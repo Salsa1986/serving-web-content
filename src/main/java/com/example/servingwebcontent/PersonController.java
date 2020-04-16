@@ -12,29 +12,29 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 @RequestMapping
-public class GreetingController {
+public class PersonController {
 
     ModelDataService modelDataService;
     Map<Long, String> mapGreetingHistory = new HashMap<>();
     private final AtomicLong idCounter = new AtomicLong();
 
     @Autowired
-    public GreetingController(ModelDataService modelDataService) {
+    public PersonController(ModelDataService modelDataService) {
         this.modelDataService = modelDataService;
     }
 
     @GetMapping("/person")
     public String greeting(Model model) {
-        model.addAttribute("greeting", new Person());
-        return "greeting";
+        model.addAttribute("person", new Person());
+        return "person";
     }
 
-    @PostMapping("/greeting")
+    @PostMapping("/person")
     public String getLogin(@ModelAttribute Person person, Model model){
         modelDataService.addUserToBase(person);
         modelDataService.saveHistoryToFile();
         model.addAttribute("history", modelDataService.getHistory());
-        return "greeting";
+        return "person";
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.servingwebcontent.model;
 
+import javax.json.Json;
+
 public class Person {
 
     private Long id;
@@ -71,4 +73,15 @@ public class Person {
         return String.format("%d, %s,", id, name);
     }
 
+    public static String convertToJson(Person person) {
+        String personObject = Json.createObjectBuilder()
+                .add("Id", person.getId())
+                .add("Name", person.getName())
+                .add("Surname", person.getSurname())
+                .add("Login", person.getLogin())
+                .add("PhoneNumber", person.getPhoneNumber())
+                .add("Email", person.getEmailAdress())
+                .build().toString();
+        return personObject;
+    }
 }
